@@ -8,9 +8,11 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-const bridge = new Bridge(true); // Use testnet
-const bitcoinService = new BitcoinService(true);
-const liquidService = new LiquidService(true);
+const isTestnet = true;
+const bridge = new Bridge(isTestnet);
+const network = isTestnet ? 'testnet' : 'mainnet';
+const bitcoinService = new BitcoinService(network);
+const liquidService = new LiquidService(network);
 
 function promptUser() {
   rl.question('Choose an action:\n1. Lock Bitcoin\n2. Unlock Bitcoin\n3. Generate Bitcoin Address\n4. Generate Liquid Address\n5. Exit\n', async (choice) => {

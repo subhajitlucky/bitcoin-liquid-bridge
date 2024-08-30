@@ -118,4 +118,12 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   logger.info(`Server running on port ${PORT}`);
+}).on('error', (err: NodeJS.ErrnoException) => {
+  if (err.code === 'ECONNREFUSED' && err.message.includes('6379')) {
+    logger.warn('Could not connect to Redis. Continuing without Redis...');
+    // Here you might want to set up an alternative to Redis or disable features that require it
+  } else {
+    logger.error('Server failed to start:', err);
+    process.exit(1);
+  }
 });

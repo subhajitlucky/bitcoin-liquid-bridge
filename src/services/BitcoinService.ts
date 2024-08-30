@@ -8,9 +8,11 @@ const ECPair = ECPairFactory(ecc);
 export class BitcoinService {
   private network: bitcoin.networks.Network;
   private bitcoinNode: any; // Replace 'any' with the actual type of your Bitcoin node service
+  private nodeUrl: string;
 
-  constructor(isTestnet: boolean = false) {
-    this.network = isTestnet ? bitcoin.networks.testnet : bitcoin.networks.bitcoin;
+  constructor(nodeUrl: string) {
+    this.network = bitcoin.networks.bitcoin;
+    this.nodeUrl = nodeUrl;
     // Initialize your Bitcoin node service here
     // this.bitcoinNode = new BitcoinNodeService();
   }

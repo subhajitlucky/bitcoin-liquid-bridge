@@ -7,8 +7,8 @@ const ECPair = ECPairFactory(ecc);
 export class LiquidService {
   private network: liquid.networks.Network;
 
-  constructor(isTestnet: boolean = false) {
-    this.network = isTestnet ? liquid.networks.testnet : liquid.networks.liquid;
+  constructor(private nodeUrl: string) {
+    this.network = liquid.networks.liquid;
   }
 
   generateAddress(): { address: string; privateKey: string } {

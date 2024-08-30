@@ -7,9 +7,10 @@ export class Bridge {
   private bridgeAddress: string;
   private bridgePrivateKey: string;
 
-  constructor(isTestnet: boolean = false) {
-    this.bitcoinService = new BitcoinService(isTestnet);
-    this.liquidService = new LiquidService(isTestnet);
+  constructor(isTestnet: boolean) {
+    const network = isTestnet ? 'testnet' : 'mainnet';
+    this.bitcoinService = new BitcoinService(network);
+    this.liquidService = new LiquidService(network);
     const { address, privateKey } = this.bitcoinService.generateAddress();
     this.bridgeAddress = address;
     this.bridgePrivateKey = privateKey;
